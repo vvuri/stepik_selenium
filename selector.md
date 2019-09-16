@@ -12,7 +12,7 @@
 - ``` "#post2 .title" ``` сложный запрос
 - ``` "#post2 > div.title" ``` взять элемент с тегом и классом: "div.title", который находится строго на один уровень иерархии ниже чем элемент "#post2" (это задаёт символ ">")
 - ``` div.col-sm-4:nth-child(2) img``` если в дочернем классе ищем второй элемент
-
+- ``` p[data-type="description"] ```, ``` .watermelon>p.description ``` -используя несколько параметров
 
 материалы по селекторам
 - (https://learn.javascript.ru/css-selectors)
@@ -36,5 +36,3 @@ XPath (XML Path Language)
 - Символ * - команда выбора всех элементов ``` //div/*[@class="jumbotron-heading"] ```
 - Поиск по классу в XPath регистрозависим ``` //div/*[@class="Jumbotron-heading"] ```
 - Console: ``` $x("//....") ```
-
-
