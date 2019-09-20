@@ -65,7 +65,7 @@ option1.click()
 ```
 <input class="check-input" type="radio" name="ruler" id="peopleRule" value="people" checked>
 ```
-```
+```python
 people_radio = browser.find_element_by_id("peopleRule")
 people_checked = people_radio.get_attribute("checked")
 
@@ -73,12 +73,42 @@ print("value of people radio: ", people_checked)
 assert people_checked is not None, "People radio is not selected by default"
 ```
  все методы WebDriver взаимодействуют с браузером с помощью JavaScript => true с маленькой буквы
-```
+```python
 assert people_checked == "true", "People radio is not selected by default"
 ``` 
 Если атрибута нет, то метод get_attribute вернёт значение None. 
-```
+```python
 assert robots_checked is None
+```
+
+#### Выпадающие списки
+```html
+<label for="dropdown">Выберите язык программирования:</label>
+<select id="dropdown" class="custom-select">
+ <option selected>--</option>
+ <option value="1">Python</option>
+ <option value="2">Java</option>
+ <option value="3">JavaScript</option>
+</select>
+```
+```python
+browser.find_element_by_tag_name("select").click()
+browser.find_element_by_css_selector("option:nth-child(2)").click()
+or
+browser.find_element_by_css_selector("[value='1']").click()
+```
+
+Более удобный способ - использование класса Select из библиотеки WebDriver:
+```python
+from selenium.webdriver.support.ui import Select
+
+select = Select(browser.find_element_by_tag_name("select"))
+
+select.select_by_value("1") # ищем элемент с текстом "Python"
+or
+select.select_by_visible_text("Python")  # ищем элемент по видимому тексту
+or
+select.select_by_index(1) #ищем элемент по его индексу или порядковому номеру
 ```
 
 
