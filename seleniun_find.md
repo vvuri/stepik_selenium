@@ -39,6 +39,47 @@ button = browser.find_element(By.ID, "submit_button")
 **find_elements_by** - содержит все те же методы поиск
 Если find_elements не смог найти элемент на странице, то он вернёт пустой список.
 
+####Click
+Checkbox (чекбокс или флажок) 
+``` <input type="checkbox"> ```
+Radiobutton (радиобаттон или переключатель)
+```html 
+<input type="radio" name="language" value="python" checked>
+<input type="radio" name="language" value="selenium">
+или 
+<div>
+  <input type="radio" id="python" name="language" checked>
+  <label for="python">Python</label>
+</div>
+```
+код нажатия
+```python
+option1 = browser.find_element_by_css_selector("[value='python']")
+или
+option1 = browser.find_element_by_css_selector("[for='python']")
+
+option1.click()
+```
+
+#### Метод get_attribute
+```
+<input class="check-input" type="radio" name="ruler" id="peopleRule" value="people" checked>
+```
+```
+people_radio = browser.find_element_by_id("peopleRule")
+people_checked = people_radio.get_attribute("checked")
+
+print("value of people radio: ", people_checked)
+assert people_checked is not None, "People radio is not selected by default"
+```
+ все методы WebDriver взаимодействуют с браузером с помощью JavaScript => true с маленькой буквы
+```
+assert people_checked == "true", "People radio is not selected by default"
+``` 
+Если атрибута нет, то метод get_attribute вернёт значение None. 
+```
+assert robots_checked is None
+```
 
 
 #### Завершение работы:
