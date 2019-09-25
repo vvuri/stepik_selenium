@@ -111,10 +111,31 @@ or
 select.select_by_index(1) #ищем элемент по его индексу или порядковому номеру
 ```
 
-
 #### Завершение работы:
 **browser.close()** закрывает текущее окно браузера
 **browser.quit()** закрывает все окна, вкладки, и процессы вебдрайвера, запущенные во время тестовой сессии.
 И расположить в разделе **finally**
 
 
+#### Выполнение JavaScript 
+Прежде чем использовать данный скрипт в тестах, вы можете проверить, как он работает прямо в браузере, выполнив код в консоли браузера. 
+Затем можете добавить его в ваш автотест с помощью execute_script(javascript_code)
+```python
+browser.execute_script("alert('Robots at work');")
+
+browser.execute_script('document.title="Script executing";')
+
+browser.execute_script("alert(\"Robots at work\");")  # внутреннее экранирование
+```
+
+Вместо встроенных find_element_by... можно использовать вот такую конструкцию:
+```JavaScript
+element = browser.execute_script('document.getElementsByName("name")')
+```
+Так же есть конструкции:
+- getElementById
+- getElementsByTagName
+- getElementsByClassName
+- querySelector - для CSS
+- querySelectorAll - для CSS (находит все совпадения)
+- evaluate - для XPATH.
