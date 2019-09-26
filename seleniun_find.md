@@ -139,3 +139,27 @@ element = browser.execute_script('document.getElementsByName("name")')
 - querySelector - для CSS
 - querySelectorAll - для CSS (находит все совпадения)
 - evaluate - для XPATH.
+
+Если необходимо просроклить элемент внутри формы:
+```python
+button = browser.find_element_by_tag_name("button")
+browser.execute_script("return arguments[0].scrollIntoView(true);", button)
+or
+browser.execute_script("window.scrollBy(0, 100);")
+button.click()
+```
+или можно в JavaScript
+```JavaScript
+button = document.getElementsByTagName("button")[0];
+button.scrollIntoView();
+```
+
+#### Загрузка файлов
+метод **send_keys** - в качестве аргумента передать путь к нужному файлу на диске
+для реализации кросплатформенности использовать **os**
+```python
+import os 
+current_dir = os.path.abspath(os.path.dirname(__file__))    # получаем путь к директории текущего исполняемого файла 
+file_path = os.path.join(current_dir, 'file.txt')           # добавляем к этому пути имя файла 
+element.send_keys(file_path)
+```
