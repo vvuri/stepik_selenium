@@ -191,3 +191,54 @@ new_window = browser.window_handles[1]
 ...
 browser.switch_to.window(window_name)
 ```
+
+#### Wait time
+Ждем появления элмента **time.sleep(1)** - плохое решение 
+
+Неявное ожидание **Implicit wait** - проверять наличие элемента будем каждые 500 мс, в течении 5 секунд:
+```python
+browser.implicitly_wait(5)
+```
+Каждый вызов команды **find_element** WebDriver будет ждать 5 секунд до появления элемента на странице прежде, чем выбросить исключение NoSuchElementException.
+- **NoSuchElementException** - если элемент не был найден за отведенное время, то мы получим.
+- **StaleElementReferenceException** - если элемент был найден в момент поиска, но при последующем обращении к элементу DOM изменился
+- **ElementNotVisibleException** - если элемент был найден в момент поиска, но сам элемент невидим
+
+**Explicit Waits**
+Явных ожиданий (Explicit Waits), позволяют задать специальное ожидание для конкретного элемента.
+Реализуется с помощью инструментов **WebDriverWait** и **expected_conditions**.
+```python
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+button = WebDriverWait(browser, 5).until(
+        EC.element_to_be_clickable((By.ID, "verify"))
+    )
+```
+**element_to_be_clickable** вернет элемент, когда он станет кликабельным, или вернет False в ином случае.
+В модуле [**expected_conditions**](https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.support.expected_conditions) есть другие правила, которые позволяют реализовать необходимые ожидания:
+- title_is
+- title_contains
+- presence_of_element_located
+- visibility_of_element_located
+- visibility_of
+- presence_of_all_elements_located
+- text_to_be_present_in_element
+- text_to_be_present_in_element_value
+- frame_to_be_available_and_switch_to_it
+- invisibility_of_element_located
+- element_to_be_clickable
+- staleness_of
+- element_to_be_selected
+- element_located_to_be_selected
+- element_selection_state_to_be
+- element_located_selection_state_to_be
+- alert_is_present
+Если мы захотим проверять, что кнопка становится неактивной после отправки данных, то можно задать негативное правило с помощью метода until_not:
+```python
+# говорим Selenium проверять в течение 5 секунд пока кнопка станет неактивной
+button = WebDriverWait(browser, 5).until_not(
+        EC.element_to_be_clickable((By.ID, "verify"))
+    )
+```
+
