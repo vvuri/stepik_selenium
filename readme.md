@@ -1,25 +1,25 @@
-Stepic Python QA course
+##Stepic Python QA course
 
 1. Install Python 3
-```
+```bash
 $ python --version
 Python 3.7.4
 ```
 
 2. Создадим виртуальное окружение с помощью команды python3
-```
+```bash
 $ python -m venv selenium_env
 ```
 
 3. Активируем окружение:
-```
+```bash
 $ source selenium_env/Scripts/activate
 (selenium_env)
 ```
 Выход из виртуального окружения командой: deactivate  - но сработал с удалением пактеов???
 
 4. Test
-```
+```python
 $ python
 Python 3.7.4 (tags/v3.7.4:e09359112e, Jul  8 2019, 19:29:22) [MSC v.1916 32 bit (Intel)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
@@ -28,7 +28,7 @@ Hello, Selenium!
 ```
 
 5. Install Selenium
-```
+```bash
 $ pip install selenium==3.14.0
 
 $ pip list | grep selenium
@@ -43,12 +43,12 @@ https://sites.google.com/a/chromium.org/chromedriver/downloads
 - закидываем в C:/soft
 - прописываем путь в PATH
 - перезапустить консоль
-```
+```bash
 $ chromedriver
 Starting ChromeDriver 76.0.3809.126
 ```
 Для MacOS
-```
+```bash
 $ brew install wget
 $ cd ~/Downloads
 $ wget https://chromedriver.storage.googleapis.com/76.0.3809.68/chromedriver_mac64.zip
@@ -57,6 +57,9 @@ $ sudo mv chromedriver /usr/local/bin
 $ chromedriver --version
 ```
 
+**Полезные ссылки:**
+- [Документация Selenium with Python](https://selenium-python.readthedocs.io/)
+- [WebDriver for Chrome](http://chromedriver.chromium.org/getting-started)
+- [Explicit Waits](https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.support.expected_conditions)
+- [Python online](https://repl.it/repls/KnobbyFastFields)
 
-PS
-Python online https://repl.it/repls/KnobbyFastFields
