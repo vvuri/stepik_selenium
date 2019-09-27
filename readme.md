@@ -1,4 +1,4 @@
-##Stepic Python QA course
+## Stepic Python QA course
 
 1. Install Python 3
 ```bash
