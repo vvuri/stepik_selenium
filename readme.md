@@ -61,5 +61,13 @@ $ chromedriver --version
 - [Документация Selenium with Python](https://selenium-python.readthedocs.io/)
 - [WebDriver for Chrome](http://chromedriver.chromium.org/getting-started)
 - [Explicit Waits](https://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.support.expected_conditions)
+
 - [Python online](https://repl.it/repls/KnobbyFastFields)
+- [PyTest Eng](https://realpython.com/python-testing/)
+
+- [GIT Интерактивное обучение](https://learngitbranching.js.org/)
+- [GIT-документация Rus](https://git-scm.com/book/ru/v2/)
+- [GIT альтернативное описание](http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/ru/index.html)
+- [GIT по шагам](https://githowto.com/ru/)
+
 
