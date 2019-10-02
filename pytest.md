@@ -1,48 +1,80 @@
-## Testing in Python
+## PyTest
 
-Инструкция **assert** выдает True или False
-```python
->>> assert abs(-42) == 42
+- PyTest полностью обратно совместим с фреймворками unittest и nosetest.
+- [Хорошая статья про PyTest](https://habr.com/ru/post/269759/)
+- ```$ pytest test_abs_project.py``` запуск тестов
+- **marks** позволяет маркировать тесты для их выборочного запуска
+- Параметризация тестов — можно запустится тест несколько раз с разными тестовыми данными
+- ```$ pytest``` без параметров — тест-раннер начнёт поиск в текущей директории
+- как аргумент можно передать файл, путь к директории или любую комбинацию директорий и файлов
+  ```bash
+  pytest scpripts/selenium_scripts
+  # найти все тесты в директории scripts/selenium_scripts
+
+  pytest test_user_interface.py
+  # найти и выполнить все тесты в файле 
+
+  pytest scripts/drafts.py::test_register_new_user_parametrized
+  # найти тест с именем test_register_new_user_parametrized в указанном файле в указанной директории и выполнить 
+  ```
+- рекурсивный поиск - PyTest обойдет все вложенные директории
+- ищет файлы **test_*.py** или **\*_test.py**
+- тесты внутри файлов
+  -- все тесты, название которых начинается с test, которые находятся вне классов
+  -- все тесты, название которых начинается с test внутри классов, имя которых начинается с Test (и без метода __init__ внутри класса)
+- assert - проверка ожидаемого результата ``` assert a == b, "Значения разные" ```  
+- with pytest.raises() для описания исключения на странице
+
+## Ключи запуска
+```bash
+py.test test_sample.py --collect-only  # collects information test suite
+py.test test_sample.py -v  # outputs verbose messages
+py.test -q test_sample.py  # omit filename output
+python -m pytest -q test_sample.py  # calling pytest through python
+py.test --markers  # show available markers
 ```
-в сообщении об ошибке всегда лучше выводить оба значения: то, которое ожидалось, и то, которое получили по факту.
-```python
-assert self.is_element_present('create_class_button', timeout=30), "No create class button"
+#### In order to create a reusable marker
+
+```ini
+> pytest.ini
+[pytest]
+markers =
+    webtest: mark a test as a webtest.
+```    
+```bash
+py.test -k "TestClass and not test_one"  # only run tests with names that match the "string expression"
+py.test test_server.py::TestClass::test_method  # cnly run tests that match the node ID
+py.test -x  # stop after first failure
+py.test --maxfail=2  # stop after two failures
+py.test --showlocals  # show local variables in tracebacks
+py.test -l  # (shortcut)
+py.test --tb=long  # the default informative traceback formatting
+py.test --tb=native  # the Python standard library formatting
+py.test --tb=short  # a shorter traceback format
+py.test --tb=line  # only one line per failure
+py.test --tb=no  # no tracebak output
+py.test -x --pdb # drop to PDB on first failure, then end test session
+py.test --durations=10  # list of the slowest 10 test durations.
+py.test --maxfail=2 -rf  # exit after 2 failures, report fail info.
+py.test -n 4  # send tests to multiple CPUs
+py.test -m slowest  # run tests with decorator @pytest.mark.slowest or slowest = pytest.mark.slowest; @slowest
+py.test --traceconfig  # find out which py.test plugins are active in your environment.
+py.test --instafail  # if pytest-instafail is installed, show errors and failures instantly instead of waiting until the end of test suite.
 ```
-
-#### Форматирование строк 
-с помощью str.format
-```python
-"Let's count together! {}, then goes {}, and then {}".format("one", "two", "three")
+#### Test using parametrize
+```pytest
+import pytest
+@pytest.mark.parametrize(
+    ('n', 'expected'), [
+        (1, 2),
+        (2, 3),
+        (3, 4),
+        (4, 5),
+        pytest.mark.xfail((1, 0)),
+        pytest.mark.xfail(reason="some bug")((1, 0)),
+        pytest.mark.skipif('sys.version_info >= (3,0)')((10, 11)),
+    ]
+)
+def test_increment(n, expected):
+    assert n + 1 == expected
 ```
-с помощью f-strings:
-```python
-str1 = "one"
-str2 = "two"
-str3 = "third"
-f"Let's count together! {str1}, then goes {str2}, and then {str3}"
-
-actual_result = "abrakadabra"
-f"Wrong text, got {actual_result}, something wrong"
-
-f"{2+3}"   # выдаст '5'
-```
-Дважды считывать атрибут — это плохая практика, потому что при повторном считывании текст на странице может измениться.
-
-#### Строки
-Поиск **подстроки** в строке **in** or **find**
-```
-s = 'My Name is Julia'
-
-if 'Name' in s:
-    print('Substring found')
-
-index = s.find('Name')
-if index != -1:
-    print(f'Substring found at index {index}')
-
-assert 'Name' in s, "вхождение подстроки в строку"
-```
-Конструкция 'Name' in s возвращает просто True или False, a find() возвращает индекс первого вхождения подстроки в строку или -1.
-
-
-

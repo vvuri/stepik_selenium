@@ -70,4 +70,11 @@ $ chromedriver --version
 - [GIT альтернативное описание](http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/ru/index.html)
 - [GIT по шагам](https://githowto.com/ru/)
 
-
+Сохраняем все версии пакетов в специальный файл requirements.txt.
+```bash
+pip freeze > requirements.txt
+```
+в свежем окружении для развертывания
+```bash
+pip install -r requirements.txt
+```
