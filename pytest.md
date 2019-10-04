@@ -78,3 +78,10 @@ import pytest
 def test_increment(n, expected):
     assert n + 1 == expected
 ```
+
+#### Запуск тестов
+```bash
+$ pytest -s test_fixture1.py
+```
+параметр -s, чтобы увидеть текст, который выводится командой print()
+
