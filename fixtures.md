@@ -26,6 +26,8 @@
 @pytest.fixture(autouse=True)
 ```
 
+фикстуры, описанные в файле **conftest.py** в корневой директории проекта, могут вызываться в любом другом файле с тестами
+
 Дополнительные материалы про фикстуры:
 - [1](https://habr.com/ru/company/yandex/blog/242795/)
 - [2](https://medium.com/@dmrlx/%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-pytest-cc6175c7d0dc)
