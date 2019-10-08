@@ -85,3 +85,8 @@ $ pytest -s test_fixture1.py
 ```
 параметр -s, чтобы увидеть текст, который выводится командой print()
 
+#### Запуск на firefox 
+```bash
+$ pytest -s -v --browser_name=firefox test_cmd.py
+```
+
