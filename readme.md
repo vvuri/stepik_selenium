@@ -57,6 +57,15 @@ $ sudo mv chromedriver /usr/local/bin
 $ chromedriver --version
 ```
 
+7. Firefox и Selenium
+[geckodriver](https://github.com/mozilla/geckodriver/releases) 
+распакуйте его в папку C:\soft\ на Windows + PATH прописать, /usr/local/bin на Ubuntu и macOS
+
+8. Плагин перезапуска упавших тестов
+```
+$ pip install pytest-rerunfailures==7.0
+```
+
 **Полезные ссылки:**
 - [Документация Selenium with Python](https://selenium-python.readthedocs.io/)
 - [WebDriver for Chrome](http://chromedriver.chromium.org/getting-started)
